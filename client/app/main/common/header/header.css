@@ -1,0 +1,16 @@
+.navbar-brand {
+    padding: 0px;
+}
+
+.navbar-brand > img {
+    height: 100%;
+    padding: 4px;
+    width: auto;
+}
+
+.navbar {
+    background-color: #ffffff;
+    border-radius: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
