@@ -29,9 +29,12 @@
      *
      * @param $urlRouterProvider - angular's provider to configure the url router.
      */
-    function appConfig($urlRouterProvider) {
+    function appConfig($urlRouterProvider, $httpProvider) {
         /** when access to the web page and the url path does not exists then the application will be redirected to /login */
         $urlRouterProvider.otherwise('/login');
+
+        /** adding AuthInterceptor so every ajax request will be called with sessionId param */
+        $httpProvider.interceptors.push('AuthInterceptor');
     }
 
     /**
