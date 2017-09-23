@@ -34,6 +34,7 @@ var config = {
             './node_modules/angular1-star-rating/dist/index.js',
             './node_modules/videogular/dist/videogular/videogular.min.js',
             './node_modules/videogular-controls/vg-controls.min.js',
+            './node_modules/angular-animate/angular-animate.min.js',
             './client/app/**/*.js'
         ],
         html: './client/app/**/*.html',

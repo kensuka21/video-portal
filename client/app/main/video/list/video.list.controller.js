@@ -14,7 +14,7 @@
      * @param VideoService - service that makes the ajax request to fetch videos
      * @param apiUrl - constant value of the api's url
      */
-    function VideoListController($scope, VideoService, apiUrl, $sce) {
+    function VideoListController($scope, VideoService, apiUrl, $timeout, $animate) {
         var self = this;
 
         self.title = 'Crossover Video Portal';
@@ -26,7 +26,8 @@
         self.stopCurrentVideoAndSetVideoIndex = stopCurrentVideoAndSetVideoIndex;
         self.currentVideoIndex = null;
 
-        loadVideos();
+
+            loadVideos();
 
         //functions
 

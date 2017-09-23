@@ -8,6 +8,7 @@
 (function () {
     var app = angular.module('videoPortalApp',
         [
+            'ngAnimate',
             'ui.router',
             'ui.router.state.events',
             'ui.bootstrap',

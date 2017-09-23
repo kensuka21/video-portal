@@ -40,3 +40,24 @@
 }
 
 
+
+.item-video.ng-move,
+.item-video.ng-enter,
+.item-video.ng-leave {
+    -webkit-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+}
+
+.item-video.ng-leave.ng-leave-active,
+.item-video.ng-move,
+.item-video.ng-enter {
+    opacity:0;
+}
+
+.item-video.ng-leave,
+.item-video.ng-move.ng-move-active,
+.item-video.ng-enter.ng-enter-active {
+    opacity:1;
+}
+
+

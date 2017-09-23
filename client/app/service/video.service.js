@@ -10,7 +10,7 @@
         .service('VideoService', VideoService);
 
     /**
-     * @param ApiService - angular's provider to make ajax requests
+     * @param ApiService - custom http provider to make ajax requests that concatenate the sessionId
      * @param $q - angular's provider to make promises
      * @param apiUrl - constant value of the api's url
      * @param AJAX_STATUS_SUCCESS - string value that the server returns when an ajax request has return successfully

@@ -18,10 +18,11 @@
   "dependencies": {
     "@uirouter/angularjs": "1.0.3",
     "angular": "1.6.6",
+    "angular-animate": "1.6.6",
     "angular-md5": "0.1.10",
-    "angular-sanitize": "^1.6.6",
+    "angular-sanitize": "1.6.6",
     "angular-ui-bootstrap": "2.5.0",
-    "angular1-star-rating": "^1.2.11",
+    "angular1-star-rating": "1.2.11",
     "body-parser": "1.15.1",
     "bootstrap": "3.3.7",
     "express": "4.13.4",
@@ -30,11 +31,10 @@
     "mongoose": "4.4.20",
     "morgan": "1.7.0",
     "ngstorage": "0.3.11",
-    "npm": "^5.4.2",
     "q": "1.4.1",
-    "videogular": "^2.2.1",
-    "videogular-controls": "^1.4.4",
-    "videogular-themes-default": "^1.4.4"
+    "videogular": "2.2.1",
+    "videogular-controls": "1.4.4",
+    "videogular-themes-default": "1.4.4"
   },
   "devDependencies": {
     "angular-mocks": "1.6.6",
