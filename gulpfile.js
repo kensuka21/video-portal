@@ -25,21 +25,27 @@ var config = {
             './node_modules/jquery/dist/jquery.min.js',
             './node_modules/bootstrap/dist/js/bootstrap.min.js',
             './node_modules/angular/angular.min.js',
+            './node_modules/angular-sanitize/angular-sanitize.min.js',
             './node_modules/@uirouter/angularjs/release/angular-ui-router.min.js',
             './node_modules/@uirouter/angularjs/release/stateEvents.min.js',
             './node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
             './node_modules/angular-md5/angular-md5.min.js',
             './node_modules/ngstorage/ngStorage.min.js',
+            './node_modules/angular1-star-rating/dist/index.js',
+            './node_modules/videogular/dist/videogular/videogular.min.js',
+            './node_modules/videogular-controls/vg-controls.min.js',
             './client/app/**/*.js'
         ],
         html: './client/app/**/*.html',
-        images: './client/app/images/*',
+        images: './client/app/assets/images/*',
         fontsGlyphicon: './node_modules/bootstrap/dist/fonts/*.{ttf,otf,woff,woff2}',
         fontsAwesome: './node_modules/font-awesome/fonts/*.{ttf,otf,woff,woff2}',
+        fontsVideogular: './node_modules/videogular-themes-default/fonts/*.{ttf,otf,woff,woff2}',
         css: [
             './node_modules/bootstrap/dist/css/bootstrap.min.css',
             './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css',
             './node_modules/font-awesome/css/font-awesome.min.css',
+            './node_modules/videogular-themes-default/videogular.css',
             './client/app/**/*.css'
         ],
         test: './client/test/**/*.js',
@@ -95,14 +101,14 @@ gulp.task('css', function () {
  */
 gulp.task('images', function () {
     return gulp.src(config.paths.images)
-        .pipe(gulp.dest(config.paths.dist + 'images/'))
+        .pipe(gulp.dest(config.paths.dist + 'assets/images/'))
 });
 
 
 /**
  * Execute all fonts tasks
  */
-gulp.task('fonts', ['font-awesome', 'font-glyphicon']);
+gulp.task('fonts', ['font-awesome', 'font-glyphicon', 'font-videogular']);
 
 /**
  * Look for all glyphicon fonts from the client and puts in dist folder
@@ -118,6 +124,14 @@ gulp.task('font-glyphicon', function () {
 gulp.task('font-awesome', function () {
     return gulp.src(config.paths.fontsAwesome)
         .pipe(gulp.dest(config.paths.dist + '/font-awesome/fonts'));
+});
+
+/**
+ * Look for all fonts awesome from the client and puts in dist folder
+ */
+gulp.task('font-videogular', function () {
+    return gulp.src(config.paths.fontsVideogular)
+        .pipe(gulp.dest(config.paths.dist + '/videogular-themes-default/fonts'));
 });
 
 /**

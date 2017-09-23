@@ -10,12 +10,12 @@
         .service('VideoService', VideoService);
 
     /**
-     * @param $http - angular's provider to make ajax requests
+     * @param ApiService - angular's provider to make ajax requests
      * @param $q - angular's provider to make promises
      * @param apiUrl - constant value of the api's url
      * @param AJAX_STATUS_SUCCESS - string value that the server returns when an ajax request has return successfully
      */
-    function VideoService($http, $q, apiUrl, AJAX_STATUS_SUCCESS) {
+    function VideoService(ApiService, $q, apiUrl, AJAX_STATUS_SUCCESS) {
         var self = this;
 
         self.find = find;
@@ -31,7 +31,7 @@
          */
         function find(skip, limit) {
             var deferred = $q.defer();
-            $http.get(apiUrl + '/video',
+            ApiService.get(apiUrl + '/video',
                 {
                     params: {
                         skip: skip,

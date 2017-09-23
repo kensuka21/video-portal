@@ -1,9 +1,41 @@
 <h3>{{ctrl.title}}</h3>
 <hr>
 
-<div class="col-md-4" ng-repeat="v in ctrl.videos track by v._id" style="display: inline-block">
-    <video width="320" height="240" controls >
-        <source ng-src="{{ctrl.getVideoUrl(v.url)}}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4" ng-repeat="v in ctrl.videos track by v._id">
+    <div class="panel panel-default panel-video">
+        <div class="panel-heading">
+            <h3 class="panel-title video-title-name">
+                <a href="#" title="{{v.name}}">{{v.name}}</a>
+            </h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="text-center video">
+                <videogular class="" vg-player-ready="ctrl.attachApiToVideo($API, $index)">
+                    <vg-media vg-src="v.videogularSrc">
+                    </vg-media>
+
+                    <vg-controls>
+                        <vg-play-pause-button ng-click="ctrl.stopCurrentVideoAndSetVideoIndex($index)"></vg-play-pause-button>
+                        <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+                        <vg-scrub-bar>
+                            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                        </vg-scrub-bar>
+                        <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                        <vg-volume>
+                            <vg-mute-button></vg-mute-button>
+                            <vg-volume-bar></vg-volume-bar>
+                        </vg-volume>
+                        <vg-fullscreen-button></vg-fullscreen-button>
+                    </vg-controls>
+                </videogular>
+            </div>
+            <br/>
+            <star-rating-comp rating="ctrl.getVideoRating(v.ratings)" show-half-stars="true"></star-rating-comp>
+
+            <p class="block-with-text">
+                {{ v.description }}
+            </p>
+        </div>
+    </div>
 </div>

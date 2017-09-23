@@ -15,7 +15,7 @@
      * @param apiUrl - constant value of the api's url
      * @param AJAX_STATUS_SUCCESS - string value that the server returns when an ajax request has return successfully
      */
-    function AuthService($http, $q, apiUrl, AJAX_STATUS_SUCCESS) {
+    function AuthService(ApiService, $q, apiUrl, AJAX_STATUS_SUCCESS) {
         var self = this;
 
         self.login = login;
@@ -31,7 +31,7 @@
          */
         function login(username, password) {
             var deferred = $q.defer();
-            $http.post(apiUrl + '/user/auth', {username: username, password: password})
+            ApiService.post(apiUrl + '/user/auth', {username: username, password: password})
                 .then(function (response) {
                     var data = response.data;
 

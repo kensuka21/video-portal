@@ -13,7 +13,10 @@
             'ui.bootstrap',
             'ngMd5',
             'ngStorage',
-            'videoPortalApp.config'
+            'star-rating',
+            'videoPortalApp.config',
+            "com.2fdevs.videogular",
+            "com.2fdevs.videogular.plugins.controls"
         ]
     );
 

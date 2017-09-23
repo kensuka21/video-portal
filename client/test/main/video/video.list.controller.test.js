@@ -22,6 +22,7 @@ describe('VideoListController', function () {
 
     it('Controller should have title', function () {
         expect(videoListController.title).toBeDefined();
+        expect(videoListController.title).toEqual('Crossover Video Portal');
     });
 
     it('find method of VideoService should be called when controller initialized ', function () {
@@ -37,5 +38,25 @@ describe('VideoListController', function () {
         var returnedUrl = videoListController.getVideoUrl(video.url);
 
         expect(returnedUrl).toEqual(videoUrl);
+    });
+
+    it('getVideoRating should return the correct average', function () {
+        var ratings = [2, 5];
+        var expectedAverage = 3.5;
+
+        var returnedAverage = videoListController.getVideoRating(ratings);
+
+        expect(returnedAverage).toBe(expectedAverage);
+    });
+
+    it('When execute attachApiToVideo should return the object to the video list correctly', function () {
+        var api = { pause: function () {}};
+        var videos = [{title: ''}];
+
+        videoListController.videos = videos;
+
+        videoListController.attachApiToVideo(api, 0);
+
+        expect(videoListController.videos[0].videoApi).toEqual(api);
     });
 });

@@ -17,12 +17,16 @@ module.exports = function (config) {
         //Every time a new dependency is added with npm must add the js file here.
         files: [
             'node_modules/angular/angular.js',
+            'node_modules/angular-sanitize/angular-sanitize.min.js',
             'node_modules/angular-mocks/angular-mocks.js',
             'node_modules/@uirouter/angularjs/release/angular-ui-router.min.js',
             'node_modules/@uirouter/angularjs/release/stateEvents.min.js',
             'node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
             'node_modules/angular-md5/angular-md5.min.js',
             'node_modules/ngstorage/ngStorage.min.js',
+            'node_modules/angular1-star-rating/dist/index.js',
+            'node_modules/videogular/dist/videogular/videogular.min.js',
+            'node_modules/videogular-controls/vg-controls.min.js',
             'client/**/*.js'
         ],
 
