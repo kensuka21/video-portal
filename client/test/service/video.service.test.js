@@ -58,21 +58,39 @@ describe('VideoService', function () {
     });
 
     it('When calling the addRating method should return the video object with the rating added', function () {
-       var video = {_id: '1', ratings: [1,2]};
-       var rating = 3;
-       var expectedVideo = {_id: '1', ratings: [1, 2, rating]};
-       var returnedVideo;
+        var video = {_id: '1', ratings: [1, 2]};
+        var rating = 3;
+        var expectedVideo = {_id: '1', ratings: [1, 2, rating]};
+        var returnedVideo;
 
-       videoService.addRating(video._id, rating)
-           .then(function (video) {
-               returnedVideo = video;
-           });
+        videoService.addRating(video._id, rating)
+            .then(function (video) {
+                returnedVideo = video;
+            });
 
-       httpBackend.whenPOST(url + '/video/ratings', { videoId: video._id, rating: rating})
-           .respond(200, {status: 'success', data: expectedVideo});
+        httpBackend.whenPOST(url + '/video/ratings', {videoId: video._id, rating: rating})
+            .respond(200, {status: 'success', data: expectedVideo});
 
-       httpBackend.flush();
+        httpBackend.flush();
 
-       expect(returnedVideo).toEqual(expectedVideo);
+        expect(returnedVideo).toEqual(expectedVideo);
+    });
+
+    it('When calling the findOne method should return a video', function () {
+        var videoId = 1;
+        var expectedVideo = {_id: videoId};
+        var returnedVideo;
+
+        videoService.findOne(videoId)
+            .then(function (video) {
+                returnedVideo = video;
+            });
+
+        httpBackend.whenGET(url + '/video/' + videoId)
+            .respond(200, {status: 'success', data: expectedVideo});
+
+        httpBackend.flush();
+
+        expect(returnedVideo).toEqual(expectedVideo);
     });
 });

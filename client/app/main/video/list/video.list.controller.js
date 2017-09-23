@@ -78,7 +78,6 @@
          *
          * @param videoIndex - the index of ctrl.videos
          */
-        //TODO: Make an unit test
         function stopCurrentVideoAndSetVideoIndex(videoIndex) {
             if (self.currentVideoIndex === null) {
                 self.currentVideoIndex = videoIndex;

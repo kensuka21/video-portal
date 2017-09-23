@@ -41,4 +41,14 @@ describe('VideoListController', function () {
 
         expect(videoListController.videos[0].videoApi).toEqual(api);
     });
+
+    it('when call stopCurrentVideoAndSetVideoIndex should call the videoApi to pause the video', function () {
+        var videoApi = jasmine.createSpyObj('videoApi', ['pause']);
+        videoListController.videos = [{ videoApi: videoApi }, { videoApi: videoApi }];
+        videoListController.currentVideoIndex = 0;
+
+        videoListController.stopCurrentVideoAndSetVideoIndex(1);
+
+        expect(videoListController.videos[0].videoApi.pause).toHaveBeenCalled();
+    });
 });
