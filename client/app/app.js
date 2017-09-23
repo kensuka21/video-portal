@@ -9,6 +9,7 @@
     var app = angular.module('videoPortalApp',
         [
             'ngAnimate',
+            'infinite-scroll',
             'ui.router',
             'ui.router.state.events',
             'ui.bootstrap',

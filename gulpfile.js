@@ -35,6 +35,7 @@ var config = {
             './node_modules/videogular/dist/videogular/videogular.min.js',
             './node_modules/videogular-controls/vg-controls.min.js',
             './node_modules/angular-animate/angular-animate.min.js',
+            './node_modules/ng-infinite-scroll/build/ng-infinite-scroll.min.js',
             './client/app/**/*.js'
         ],
         html: './client/app/**/*.html',

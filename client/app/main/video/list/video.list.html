@@ -1,43 +1,55 @@
-<h3>{{ctrl.title}}</h3>
-<hr>
+<div class="video-list-content">
+    <h3>{{ctrl.title}}</h3>
+    <hr>
+    <div infinite-scroll='ctrl.loadVideos()'
+         infinite-scroll-disabled='ctrl.busy'
+         infinite-scroll-distance="0"
+         infinite-scroll-parent="true"
+         infinite-scroll-container='"body"'>
 
-<div class="item-video col-xs-12 col-sm-12 col-md-6 col-lg-4" ng-repeat="v in ctrl.videos">
-    <div class="">
-        <div class="panel panel-default panel-video ">
-            <div class="panel-heading">
-                <h3 class="panel-title video-title-name">
-                    <a href="#" title="{{v.name}}">{{v.name}}</a>
-                </h3>
-            </div>
-            <div class="panel-body">
+        <div class="row">
+            <div class="item-video col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-repeat="v in ctrl.videos">
+                <div class="panel panel-default panel-video ">
+                    <div class="panel-heading">
+                        <h3 class="panel-title video-title-name">
+                            <a href="#" title="{{v.name}}">{{v.name}}</a>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="text-center video">
+                            <videogular class="" vg-player-ready="ctrl.attachApiToVideo($API, $index)">
+                                <vg-media vg-src="v.videogularSrc">
+                                </vg-media>
 
-                <div class="text-center video">
-                    <videogular class="" vg-player-ready="ctrl.attachApiToVideo($API, $index)">
-                        <vg-media vg-src="v.videogularSrc">
-                        </vg-media>
+                                <vg-controls>
+                                    <vg-play-pause-button
+                                            ng-click="ctrl.stopCurrentVideoAndSetVideoIndex($index)"></vg-play-pause-button>
+                                    <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+                                    <vg-scrub-bar>
+                                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                    </vg-scrub-bar>
+                                    <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                                    <vg-volume>
+                                        <vg-mute-button></vg-mute-button>
+                                        <vg-volume-bar></vg-volume-bar>
+                                    </vg-volume>
+                                    <vg-fullscreen-button></vg-fullscreen-button>
+                                </vg-controls>
+                            </videogular>
+                        </div>
+                        <br/>
+                        <star-rating-comp rating="ctrl.getVideoRating(v.ratings)"
+                                          show-half-stars="true"></star-rating-comp>
 
-                        <vg-controls>
-                            <vg-play-pause-button
-                                    ng-click="ctrl.stopCurrentVideoAndSetVideoIndex($index)"></vg-play-pause-button>
-                            <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
-                            <vg-scrub-bar>
-                                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                            </vg-scrub-bar>
-                            <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
-                            <vg-volume>
-                                <vg-mute-button></vg-mute-button>
-                                <vg-volume-bar></vg-volume-bar>
-                            </vg-volume>
-                            <vg-fullscreen-button></vg-fullscreen-button>
-                        </vg-controls>
-                    </videogular>
+                        <p class="block-with-text">
+                            {{ v.description }}
+                        </p>
+                    </div>
                 </div>
-                <br/>
-                <star-rating-comp rating="ctrl.getVideoRating(v.ratings)" show-half-stars="true"></star-rating-comp>
+            </div>
 
-                <p class="block-with-text">
-                    {{ v.description }}
-                </p>
+            <div ng-show='ctrl.busy'>
+                <img class="img center-block" src="/assets/images/loading.gif"/>
             </div>
         </div>
     </div>

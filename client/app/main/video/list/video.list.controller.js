@@ -13,34 +13,45 @@
      * @param $scope - scope that angular created for this controller
      * @param VideoService - service that makes the ajax request to fetch videos
      * @param apiUrl - constant value of the api's url
+     * @param $sce - creates trust resource urls
      */
-    function VideoListController($scope, VideoService, apiUrl, $timeout, $animate) {
+    function VideoListController($scope, VideoService, apiUrl, $sce) {
         var self = this;
 
-        self.title = 'Crossover Video Portal';
-        self.videos = [];
+        self.title = 'Crossover Video Portal'; /** title page */
+        self.videos = []; /** list of video */
+        self.currentVideoIndex = null; /** index of the video that is current playing */
+        self.busy = false; /** flag to know when the page is loading more videos */
         self.getVideoUrl = getVideoUrl;
         self.loadVideos = loadVideos;
         self.getVideoRating = getVideoRating;
         self.attachApiToVideo = attachApiToVideo;
         self.stopCurrentVideoAndSetVideoIndex = stopCurrentVideoAndSetVideoIndex;
-        self.currentVideoIndex = null;
 
 
-            loadVideos();
+        loadVideos();
 
         //functions
 
-        /** Calls find method from VideoService to fetch all videos */
+        /**
+         * Calls find method from VideoService to fetch videos.
+         * If there are videos in the page, so will search for the videos that are next to the last video loaded in the page.
+         * */
         function loadVideos() {
-            VideoService.find(0, 10)
+            if (self.busy) return;
+
+            self.busy = true;
+
+            VideoService.find(self.videos.length, 10)
                 .then(function (videos) {
                     angular.forEach(videos, function (video, idx) {
                         /** attach the object so the videogular would render the video */
-                       video.videogularSrc = [{src: getVideoUrl(video.url), type: "video/mp4"}];
+                       video.videogularSrc = [{src: $sce.trustAsResourceUrl(getVideoUrl(video.url)), type: "video/mp4"}];
 
-                       self.videos.push(video)
+                       self.videos.push(video);
                     });
+
+                    self.busy = false;
                 });
         }
 
@@ -85,7 +96,6 @@
          * @param videoIndex - the index of ctrl.videos
          */
         function stopCurrentVideoAndSetVideoIndex(videoIndex) {
-            debugger;
             if(self.currentVideoIndex === null){
                 self.currentVideoIndex = videoIndex;
             }else if(self.currentVideoIndex !== videoIndex){

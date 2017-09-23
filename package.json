@@ -30,6 +30,7 @@
     "jquery": "3.2.1",
     "mongoose": "4.4.20",
     "morgan": "1.7.0",
+    "ng-infinite-scroll": "1.0.0",
     "ngstorage": "0.3.11",
     "q": "1.4.1",
     "videogular": "2.2.1",
