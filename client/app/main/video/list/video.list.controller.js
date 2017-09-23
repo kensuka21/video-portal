@@ -1,8 +1,8 @@
 /**
- * @login.controller.js
+ * @video.list.controller.js
  *
  * @description
- * This controller will handle all the data and events that will be presented in the Main Page.
+ * This controller will handle all the data and events that will be presented in the Video List Page.
  */
 
 (function () {
@@ -15,23 +15,21 @@
      * @param apiUrl - constant value of the api's url
      * @param $sce - creates trust resource urls
      */
-    function VideoListController($scope, VideoService, apiUrl, $sce) {
+    function VideoListController($scope, VideoService, apiUrl, $sce, $state, Average) {
         var self = this;
 
-        self.title = 'Crossover Video Portal';
         /** title page */
-        self.videos = [];
+        self.title = 'Crossover Video Portal';
         /** list of video */
-        self.currentVideoIndex = null;
+        self.videos = [];
         /** index of the video that is current playing */
-        self.busy = false;
+        self.currentVideoIndex = null;
         /** flag to know when the page is loading more videos */
-        self.getVideoUrl = getVideoUrl;
+        self.busy = false;
         self.loadVideos = loadVideos;
-        self.getVideoRating = getVideoRating;
         self.attachApiToVideo = attachApiToVideo;
         self.stopCurrentVideoAndSetVideoIndex = stopCurrentVideoAndSetVideoIndex;
-        self.setVideoRating = setVideoRating;
+        self.goToDetailPage = goToDetailPage;
 
 
         loadVideos();
@@ -52,42 +50,18 @@
                     angular.forEach(videos, function (video, idx) {
                         /** attach the object so the videogular would render the video */
                         video.videogularSrc = [{
-                            src: $sce.trustAsResourceUrl(getVideoUrl(video.url)),
+                            src: $sce.trustAsResourceUrl(apiUrl + '/' + video.url),
                             type: "video/mp4"
                         }];
 
                         /** set the video rating average */
 
-                        video.ratingAverage = getVideoRating(video.ratings);
+                        video.ratingAverage = Average(video.ratings);
                         self.videos.push(video);
                     });
 
                     self.busy = false;
                 });
-        }
-
-        /**
-         * Concatenate the host and the video url to get the video from the server
-         *
-         * @param videoUrl {string} - This video url comes from the server
-         * @returns {string}
-         */
-        function getVideoUrl(videoUrl) {
-            return apiUrl + '/' + videoUrl;
-        }
-
-        /**
-         * Calculate the average of ratings
-         *
-         * @param ratings {array} - This array contains all the rating that the video has
-         * */
-        function getVideoRating(ratings) {
-            var sum = 0;
-            for (var i = 0; i < ratings.length; i++) {
-                sum += ratings[i];
-            }
-
-            return sum / ratings.length;
         }
 
         /**
@@ -115,20 +89,11 @@
             }
         }
 
-        /**
-         * Add the rating to the video
-         *
-         * @param $event - json object provide by angular-star-rating that contains the rating value that is clicked
-         * @param video - json object of the video that contains the id, rating, average rating, etc
-         */
-        function setVideoRating($event, video) {
-            var rating = $event.rating;
-
-            VideoService.addRating(video._id, rating)
-                .then(function (returnedVideo) {
-                    video.ratings = returnedVideo.ratings;
-                    video.ratingAverage = getVideoRating(video.ratings);
-                });
+        function goToDetailPage(video) {
+            $state.go('main.video.detail', {
+                id: video._id,
+                video: video
+            });
         }
     }
 })();

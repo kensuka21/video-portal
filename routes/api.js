@@ -9,7 +9,7 @@ var routesAPI = function(app){
 
 	//video routes
 	app.get('/video', helpers.isAuthenticated, videos.get);
-	app.get('/video', helpers.isAuthenticated, videos.getOne);
+	app.get('/video/:videoId', helpers.isAuthenticated, videos.getOne);
 	app.post('/video/ratings', helpers.isAuthenticated, videos.rate);
 }
 

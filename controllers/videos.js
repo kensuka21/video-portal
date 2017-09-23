@@ -22,8 +22,8 @@ videos.get = function (req, res) {
 
 // controller that handles single video fetch request.
 videos.getOne = function (req, res) {
-	
-	var videoid = req.query.videoId;
+
+	var videoid = req.params.videoId;
 
 	var videosData = videoModel.getOne(videoid);
 	videosData.then(function(data){

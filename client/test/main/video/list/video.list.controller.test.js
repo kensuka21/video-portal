@@ -31,26 +31,6 @@ describe('VideoListController', function () {
        expect(videoServiceMock.find).toHaveBeenCalled();
     });
 
-    it('getVideoUrl should return the video url concatenated with the apiUrl', function () {
-        var video = {
-            url: 'videos/video.mp4'
-        };
-        var videoUrl = url + '/' + video.url;
-
-        var returnedUrl = videoListController.getVideoUrl(video.url);
-
-        expect(returnedUrl).toEqual(videoUrl);
-    });
-
-    it('getVideoRating should return the correct average', function () {
-        var ratings = [2, 5];
-        var expectedAverage = 3.5;
-
-        var returnedAverage = videoListController.getVideoRating(ratings);
-
-        expect(returnedAverage).toBe(expectedAverage);
-    });
-
     it('When execute attachApiToVideo should return the object to the video list correctly', function () {
         var api = { pause: function () {}};
         var videos = [{title: ''}];
@@ -60,14 +40,5 @@ describe('VideoListController', function () {
         videoListController.attachApiToVideo(api, 0);
 
         expect(videoListController.videos[0].videoApi).toEqual(api);
-    });
-
-    it('When execute setVideoRating should call the addRating from VideoService', function () {
-        var $event = {rating: 5};
-        var video = {_id: '1'};
-
-        videoListController.setVideoRating($event, video);
-
-        expect(videoServiceMock.addRating).toHaveBeenCalled();
     });
 });

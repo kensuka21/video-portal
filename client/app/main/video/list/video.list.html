@@ -12,7 +12,7 @@
                 <div class="panel panel-default panel-video ">
                     <div class="panel-heading">
                         <h3 class="panel-title video-title-name">
-                            <a href="#" title="{{v.name}}">{{v.name}}</a>
+                            <a href="javascript:void(0)" ng-click="ctrl.goToDetailPage(v)" title="{{v.name}}">{{v.name}}</a>
                         </h3>
                     </div>
                     <div class="panel-body">
@@ -38,13 +38,8 @@
                             </videogular>
                         </div>
                         <br/>
-                        <star-rating-comp rating="v.ratingAverage"
-                                          show-half-stars="true"
-                                          show-hover-stars="true"
-                                          label-text="(v.ratingAverage | number: 2 )+ '/5'"
-                                          on-click="ctrl.setVideoRating($event, v)"
-                                          size="'medium'"
-                                          label-position="'right'"></star-rating-comp>
+
+                        <app-video-rating video="v"></app-video-rating>
 
                         <p class="block-with-text">
                             {{ v.description }}

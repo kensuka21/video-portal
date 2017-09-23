@@ -19,6 +19,7 @@
         var self = this;
 
         self.find = find;
+        self.findOne = findOne;
         self.addRating = addRating;
 
         /**
@@ -62,6 +63,29 @@
             var deferred = $q.defer();
 
             ApiService.post(apiUrl + '/video/ratings', { videoId: videoId, rating: rating})
+                .then(function (response) {
+                    var data = response.data;
+                    if (data.status !== AJAX_STATUS_SUCCESS) {
+                        deferred.reject(data.error);
+                        return;
+                    }
+
+                    deferred.resolve(data.data);
+                });
+
+            return deferred.promise;
+        }
+
+        /**
+         *
+         * @param videoId - this is id that is saved in the database server
+         * @returns {Function} - A promise with the resolve of video if the status is success
+         * and reject value: (string) if the status is error
+         */
+        function findOne(videoId) {
+            var deferred = $q.defer();
+
+            ApiService.get(apiUrl + '/video/' + videoId)
                 .then(function (response) {
                     var data = response.data;
                     if (data.status !== AJAX_STATUS_SUCCESS) {
