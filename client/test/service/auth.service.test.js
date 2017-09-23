@@ -1,12 +1,23 @@
 describe('AuthService', function () {
-    var httpBackend, authService, url, ajaxStatusSuccess;
+    var httpBackend, authService, url, ajaxStatusSuccess, localStorage;
     beforeEach(module('videoPortalApp'));
 
-    beforeEach(inject(function ($httpBackend, AuthService, AJAX_STATUS_SUCCESS, apiUrl) {
+    beforeEach(function () {
+        module(function ($provide) {
+            $provide.value('$localStorage', {
+                authInfo: {
+                    sessionId: 'session'
+                }
+            });
+        })
+    });
+
+    beforeEach(inject(function ($httpBackend, AuthService, AJAX_STATUS_SUCCESS, apiUrl, $localStorage) {
         httpBackend = $httpBackend;
         authService = AuthService;
         url = apiUrl;
         ajaxStatusSuccess = AJAX_STATUS_SUCCESS;
+        localStorage = $localStorage;
     }));
 
     describe('login method call', function () {
@@ -58,5 +69,22 @@ describe('AuthService', function () {
 
             expect(returnedError).toEqual(expectedError);
         });
+
+        it('When calling logout should return success', function () {
+            var returnedResponse;
+            var expectedResponse = {status: 'success'};
+
+            authService.logout()
+                .then(function (response) {
+                    returnedResponse = response;
+                });
+
+            httpBackend.whenGET(url + '/user/logout?sessionId=' + localStorage.authInfo.sessionId)
+                .respond(200, expectedResponse);
+
+            httpBackend.flush();
+
+            expect(returnedResponse).toEqual(expectedResponse);
+        })
     });
 });
