@@ -12,7 +12,6 @@
             'infinite-scroll',
             'ui.router',
             'ui.router.state.events',
-            'ui.bootstrap',
             'ngMd5',
             'ngStorage',
             'star-rating',

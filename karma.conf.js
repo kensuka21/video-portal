@@ -21,7 +21,6 @@ module.exports = function (config) {
             'node_modules/angular-mocks/angular-mocks.js',
             'node_modules/@uirouter/angularjs/release/angular-ui-router.min.js',
             'node_modules/@uirouter/angularjs/release/stateEvents.min.js',
-            'node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
             'node_modules/angular-md5/angular-md5.min.js',
             'node_modules/ngstorage/ngStorage.min.js',
             'node_modules/angular1-star-rating/dist/index.js',
@@ -39,13 +38,22 @@ module.exports = function (config) {
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        preprocessors: {},
+        preprocessors: {
+            'client/app/**/*.js': ['coverage']
+        },
 
-
+        // optionally, configure the reporter
+        coverageReporter: {
+            type: 'html',
+            dir: 'coverage/',
+            instrumenterOptions: {
+                istanbul: { noCompact: true }
+            }
+        },
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress'],
+        reporters: ['progress', 'coverage'],
 
 
         // web server port
