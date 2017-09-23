@@ -18,15 +18,20 @@
     function VideoListController($scope, VideoService, apiUrl, $sce) {
         var self = this;
 
-        self.title = 'Crossover Video Portal'; /** title page */
-        self.videos = []; /** list of video */
-        self.currentVideoIndex = null; /** index of the video that is current playing */
-        self.busy = false; /** flag to know when the page is loading more videos */
+        self.title = 'Crossover Video Portal';
+        /** title page */
+        self.videos = [];
+        /** list of video */
+        self.currentVideoIndex = null;
+        /** index of the video that is current playing */
+        self.busy = false;
+        /** flag to know when the page is loading more videos */
         self.getVideoUrl = getVideoUrl;
         self.loadVideos = loadVideos;
         self.getVideoRating = getVideoRating;
         self.attachApiToVideo = attachApiToVideo;
         self.stopCurrentVideoAndSetVideoIndex = stopCurrentVideoAndSetVideoIndex;
+        self.setVideoRating = setVideoRating;
 
 
         loadVideos();
@@ -46,9 +51,15 @@
                 .then(function (videos) {
                     angular.forEach(videos, function (video, idx) {
                         /** attach the object so the videogular would render the video */
-                       video.videogularSrc = [{src: $sce.trustAsResourceUrl(getVideoUrl(video.url)), type: "video/mp4"}];
+                        video.videogularSrc = [{
+                            src: $sce.trustAsResourceUrl(getVideoUrl(video.url)),
+                            type: "video/mp4"
+                        }];
 
-                       self.videos.push(video);
+                        /** set the video rating average */
+
+                        video.ratingAverage = getVideoRating(video.ratings);
+                        self.videos.push(video);
                     });
 
                     self.busy = false;
@@ -76,7 +87,7 @@
                 sum += ratings[i];
             }
 
-            return sum/ratings.length;
+            return sum / ratings.length;
         }
 
         /**
@@ -96,12 +107,28 @@
          * @param videoIndex - the index of ctrl.videos
          */
         function stopCurrentVideoAndSetVideoIndex(videoIndex) {
-            if(self.currentVideoIndex === null){
+            if (self.currentVideoIndex === null) {
                 self.currentVideoIndex = videoIndex;
-            }else if(self.currentVideoIndex !== videoIndex){
+            } else if (self.currentVideoIndex !== videoIndex) {
                 self.videos[self.currentVideoIndex].videoApi.pause();
                 self.currentVideoIndex = videoIndex;
             }
+        }
+
+        /**
+         * Add the rating to the video
+         *
+         * @param $event - json object provide by angular-star-rating that contains the rating value that is clicked
+         * @param video - json object of the video that contains the id, rating, average rating, etc
+         */
+        function setVideoRating($event, video) {
+            var rating = $event.rating;
+
+            VideoService.addRating(video._id, rating)
+                .then(function (returnedVideo) {
+                    video.ratings = returnedVideo.ratings;
+                    video.ratingAverage = getVideoRating(video.ratings);
+                });
         }
     }
 })();

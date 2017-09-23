@@ -38,8 +38,13 @@
                             </videogular>
                         </div>
                         <br/>
-                        <star-rating-comp rating="ctrl.getVideoRating(v.ratings)"
-                                          show-half-stars="true"></star-rating-comp>
+                        <star-rating-comp rating="v.ratingAverage"
+                                          show-half-stars="true"
+                                          show-hover-stars="true"
+                                          label-text="(v.ratingAverage | number: 2 )+ '/5'"
+                                          on-click="ctrl.setVideoRating($event, v)"
+                                          size="'medium'"
+                                          label-position="'right'"></star-rating-comp>
 
                         <p class="block-with-text">
                             {{ v.description }}

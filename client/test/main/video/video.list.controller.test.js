@@ -4,7 +4,7 @@ describe('VideoListController', function () {
     beforeEach(module('videoPortalApp'));
 
     beforeEach(function () {
-        videoServiceMock = jasmine.createSpyObj('videoServiceMock', ['find']);
+        videoServiceMock = jasmine.createSpyObj('videoServiceMock', ['find', 'addRating']);
 
         module(function ($provide) {
             $provide.value('VideoService', videoServiceMock);
@@ -13,6 +13,8 @@ describe('VideoListController', function () {
 
     beforeEach(inject(function ($controller, $rootScope, $q, apiUrl) {
         videoServiceMock.find.and.returnValue($q.resolve([{}]));
+        videoServiceMock.addRating.and.returnValue($q.resolve([{}]));
+
         scope = $rootScope.$new();
         url = apiUrl;
         videoListController = $controller('VideoListController', {
@@ -58,5 +60,14 @@ describe('VideoListController', function () {
         videoListController.attachApiToVideo(api, 0);
 
         expect(videoListController.videos[0].videoApi).toEqual(api);
+    });
+
+    it('When execute setVideoRating should call the addRating from VideoService', function () {
+        var $event = {rating: 5};
+        var video = {_id: '1'};
+
+        videoListController.setVideoRating($event, video);
+
+        expect(videoServiceMock.addRating).toHaveBeenCalled();
     });
 });

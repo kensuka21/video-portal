@@ -19,6 +19,7 @@
         var self = this;
 
         self.find = find;
+        self.addRating = addRating;
 
         /**
          * Make an ajax request to get videos.
@@ -47,6 +48,30 @@
 
                     deferred.resolve(data.data);
                 });
+            return deferred.promise;
+        }
+
+        /**
+         *
+         * @param videoId - id of the video in the database
+         * @param rating - rating that will be added
+         * @returns {Function} - A promise with the resolve of video if the status is success
+         * and reject value: (string) if the status is error
+         */
+        function addRating(videoId, rating) {
+            var deferred = $q.defer();
+
+            ApiService.post(apiUrl + '/video/ratings', { videoId: videoId, rating: rating})
+                .then(function (response) {
+                    var data = response.data;
+                    if (data.status !== AJAX_STATUS_SUCCESS) {
+                        deferred.reject(data.error);
+                        return;
+                    }
+
+                    deferred.resolve(data.data);
+                });
+
             return deferred.promise;
         }
     }

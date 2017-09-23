@@ -59,3 +59,8 @@
 .item-video.ng-enter.ng-enter-active {
     opacity:1;
 }
+
+.medium .label-value{
+    font-size: 14px !important;
+    margin-top: 3px;
+}
