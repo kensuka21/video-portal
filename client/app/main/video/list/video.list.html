@@ -12,11 +12,12 @@
                 <div class="panel panel-default panel-video ">
                     <div class="panel-heading">
                         <h3 class="panel-title video-title-name">
-                            <a href="javascript:void(0)" ng-click="ctrl.goToDetailPage(v)" title="{{v.name}}">{{v.name}}</a>
+                            <a href="javascript:void(0)" ui-sref="main.video.detail({ id: v._id})" title="{{v.name}}">{{v.name}}</a>
                         </h3>
                     </div>
                     <div class="panel-body">
                         <div class="text-center video">
+                            <!-- Video player -->
                             <videogular class="" vg-player-ready="ctrl.attachApiToVideo($API, $index)">
                                 <vg-media vg-src="v.videogularSrc">
                                 </vg-media>
@@ -39,6 +40,7 @@
                         </div>
                         <br/>
 
+                        <!-- Video rating -->
                         <app-video-rating video="v"></app-video-rating>
 
                         <p class="block-with-text">
@@ -48,6 +50,7 @@
                 </div>
             </div>
 
+            <!-- Gif loading -->
             <div ng-show='ctrl.busy'>
                 <img class="img center-block" src="/assets/images/loading.gif"/>
             </div>

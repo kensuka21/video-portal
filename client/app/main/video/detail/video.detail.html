@@ -1,9 +1,9 @@
 <div class="video-detail-content">
     <h3>{{ctrl.title}}</h3>
     <hr>
-
     <div class="row">
-        <div class="col-lg-12">
+        <!-- Right side -->
+        <div class="col-lg-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title video-title-name">
@@ -12,7 +12,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="text-center">
-                        <videogular class="" vg-player-ready="ctrl.attachApiToVideo($API, $index)">
+                        <!-- Video player -->
+                        <videogular vg-auto-play="true">
                             <vg-media vg-src="ctrl.video.videogularSrc">
                             </vg-media>
 
@@ -32,18 +33,61 @@
                         </videogular>
                     </div>
                     <br/>
+
+                    <!-- Video rating -->
                     <app-video-rating video="ctrl.video"></app-video-rating>
 
-                    <p class="block-with-text">
+                    <p class="">
                         {{ ctrl.video.description }}
                     </p>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-4">
+        <!-- Left side -->
+        <div class="col-lg-4 side-video-list">
+            <div infinite-scroll='ctrl.loadVideos()'
+                 infinite-scroll-disabled='ctrl.busy'
+                 infinite-scroll-distance="0"
+                 infinite-scroll-parent="true"
+                 infinite-scroll-container='"body"'>
 
+                <div class="">
+                    <div class="item-video" ng-repeat="v in ctrl.videos">
+                        <div class="panel panel-default panel-video ">
+                            <div class="panel-heading">
+                                <h3 class="panel-title video-title-name">
+                                    <a href="javascript:void(0)" ui-sref="main.video.detail({ id: v._id})" ui-sref-opts="{reload: true}" title="{{v.name}}">{{v.name}}</a>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="text-center video">
+                                    <a href="javascript:void(0)" ui-sref="main.video.detail({ id: v._id})" ui-sref-opts="{reload: true}" title="{{v.name}}">
+                                        <!-- Video player -->
+                                        <videogular >
+                                            <vg-media vg-src="v.videogularSrc" ng-click="alert('asd')">
+                                            </vg-media>
+                                        </videogular>
+                                    </a>
+                                </div>
+                                <br/>
+
+                                <!-- Video rating -->
+                                <app-video-rating video="v"></app-video-rating>
+
+                                <p class="block-with-text">
+                                    {{ v.description }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gif loading -->
+                    <div ng-show='ctrl.busy'>
+                        <img class="img center-block" src="/assets/images/loading.gif"/>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
 </div>

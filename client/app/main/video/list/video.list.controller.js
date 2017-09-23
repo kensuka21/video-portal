@@ -14,8 +14,9 @@
      * @param VideoService - service that makes the ajax request to fetch videos
      * @param apiUrl - constant value of the api's url
      * @param $sce - creates trust resource urls
+     * @param Average - calculate the average of a number's array
      */
-    function VideoListController($scope, VideoService, apiUrl, $sce, $state, Average) {
+    function VideoListController($scope, VideoService, apiUrl, $sce, Average) {
         var self = this;
 
         /** title page */
@@ -29,8 +30,6 @@
         self.loadVideos = loadVideos;
         self.attachApiToVideo = attachApiToVideo;
         self.stopCurrentVideoAndSetVideoIndex = stopCurrentVideoAndSetVideoIndex;
-        self.goToDetailPage = goToDetailPage;
-
 
         loadVideos();
 
@@ -74,12 +73,12 @@
             self.videos[videoIndex].videoApi = api;
         }
 
-
         /**
          * Stop the current video (if there is a video playing) and then set the current video index in the self.currentVideoIndex variable
          *
          * @param videoIndex - the index of ctrl.videos
          */
+        //TODO: Make an unit test
         function stopCurrentVideoAndSetVideoIndex(videoIndex) {
             if (self.currentVideoIndex === null) {
                 self.currentVideoIndex = videoIndex;
@@ -87,13 +86,6 @@
                 self.videos[self.currentVideoIndex].videoApi.pause();
                 self.currentVideoIndex = videoIndex;
             }
-        }
-
-        function goToDetailPage(video) {
-            $state.go('main.video.detail', {
-                id: video._id,
-                video: video
-            });
         }
     }
 })();
