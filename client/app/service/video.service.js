@@ -33,7 +33,7 @@
          */
         function find(skip, limit) {
             var deferred = $q.defer();
-            ApiService.get(apiUrl + '/video',
+            ApiService.get(apiUrl + '/videos',
                 {
                     params: {
                         skip: skip,
@@ -62,7 +62,7 @@
         function addRating(videoId, rating) {
             var deferred = $q.defer();
 
-            ApiService.post(apiUrl + '/video/ratings', { videoId: videoId, rating: rating})
+            ApiService.post(apiUrl + '/videos/ratings', { videoId: videoId, rating: rating})
                 .then(function (response) {
                     var data = response.data;
                     if (data.status !== AJAX_STATUS_SUCCESS) {
@@ -85,7 +85,7 @@
         function findOne(videoId) {
             var deferred = $q.defer();
 
-            ApiService.get(apiUrl + '/video/' + videoId)
+            ApiService.get(apiUrl + '/videos/' + videoId)
                 .then(function (response) {
                     var data = response.data;
                     if (data.status !== AJAX_STATUS_SUCCESS) {

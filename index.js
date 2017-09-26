@@ -41,7 +41,7 @@ helperFunctions.populateDb();
 routes(app);
 
 // serve video files.
-app.use('/videos',express.static('videos'));
+app.use('/video',express.static('videos'));
 
 // serve client side code only if the environment is production.
 if(process.env.NODE_ENV === 'production')

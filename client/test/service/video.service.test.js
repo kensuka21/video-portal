@@ -26,7 +26,7 @@ describe('VideoService', function () {
                 returnedVideos = videos;
             });
 
-        httpBackend.whenGET(url + '/video?skip=' + skip + '&limit=' + limit)
+        httpBackend.whenGET(url + '/videos?skip=' + skip + '&limit=' + limit)
             .respond(200, {status: 'success', data: expectedList});
 
         httpBackend.flush();
@@ -49,7 +49,7 @@ describe('VideoService', function () {
                 returnedError = err;
             });
 
-        httpBackend.whenGET(url + '/video?skip=' + skip + '&limit=' + limit)
+        httpBackend.whenGET(url + '/videos?skip=' + skip + '&limit=' + limit)
             .respond(200, {status: expectedStatus, error: expectedError});
 
         httpBackend.flush();
@@ -68,7 +68,7 @@ describe('VideoService', function () {
                 returnedVideo = video;
             });
 
-        httpBackend.whenPOST(url + '/video/ratings', {videoId: video._id, rating: rating})
+        httpBackend.whenPOST(url + '/videos/ratings', {videoId: video._id, rating: rating})
             .respond(200, {status: 'success', data: expectedVideo});
 
         httpBackend.flush();
@@ -86,7 +86,7 @@ describe('VideoService', function () {
                 returnedVideo = video;
             });
 
-        httpBackend.whenGET(url + '/video/' + videoId)
+        httpBackend.whenGET(url + '/videos/' + videoId)
             .respond(200, {status: 'success', data: expectedVideo});
 
         httpBackend.flush();
