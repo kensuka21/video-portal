@@ -3,7 +3,9 @@ This is a web application built with AngularJS.
 
 
 ## How to install dependencies:
-- npm install
+```sh
+npm install
+```
 
 
 ## How to start the application:
