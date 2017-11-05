@@ -19,21 +19,21 @@ npm start
 
 ## Dependencies
 The following dependencies are used in this app:
-* angular: The frontend library used for this application
-* uirouter/angularjs: Manage the navigation flow of the application
-* angular-animate: Library to manage the animations
-* angular-md5: Encrypt string values
-* angular1-star-rating: This library provide an implementation of stars rating
+* angular: The frontend library used for this application.
+* uirouter/angularjs: Manage the navigation flow of the application.
+* angular-animate: Library to manage the animations.
+* angular-md5: Encrypt string values.
+* angular1-star-rating: This library provide an implementation of stars rating.
 * bootstrap: CSS library for the UI.
-* font-awesome: Icons library
-* ng-infinite-scroll: Manage the infinite scroll flow
-* ngstorage: Provide an implementation to access the localStorage
-* videogular: Video player library
-* karma: The test runner
-* karma-coverage: To know the test coverage of the application
-* jasmine: Assertion library
+* font-awesome: Icons library.
+* ng-infinite-scroll: Manage the infinite scroll flow.
+* ngstorage: Provide an implementation to access the localStorage.
+* videogular: Video player library.
+* karma: The test runner.
+* karma-coverage: To know the test coverage of the application.
+* jasmine: Assertion library.
 * angular-mocks: To mock angular's providers as service, factory, etc.
-* gulp: The task manager
+* gulp: The task manager.
 
 
 ## How to start the application in development mode:
