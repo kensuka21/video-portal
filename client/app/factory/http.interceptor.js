@@ -10,7 +10,7 @@
             return {
                 responseError: function (response) {
                     if (response.status === 401) {
-                        //  Redirect user to login page.
+                        //  Redirect user to login page and delete the token from localStorage.
                         delete $localStorage.authInfo;
                         $state.go('login');
                     }
