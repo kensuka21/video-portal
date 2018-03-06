@@ -37,7 +37,7 @@ The following dependencies are used in this app:
 
 
 ## How to start the application in development mode:
-- Make sure you have a MongoDB instance running in the machine
+- Make sure you have a MongoDB(27017 port) instance running in the machine
 - Execute: 
 ```sh
 npm run dev
