@@ -9,7 +9,7 @@ npm install
 
 
 ## How to start the application:
-- Make sure you have a MongoDB instance running in the machine
+- Make sure you have a MongoDB(27017 port) instance running in the machine
 - and then execute: 
 ```sh
 npm start
