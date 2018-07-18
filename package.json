@@ -1,7 +1,7 @@
 {
   "name": "test",
   "version": "1.0.0",
-  "description": "",
+  "description": "Whiteboard Test provided by Crossover",
   "main": "index.js",
   "scripts": {
     "test": "karma start",
