@@ -49,7 +49,6 @@
      * @param $state - angular's provider to change the location page
      */
     function appRunConfig($rootScope, $localStorage, $state) {
-
         /** This event listener will be executed every time the application will navigate.
          * It will validate if the user is authenticated to join the application otherwise will be returned to login' page */
         $rootScope.$on('$stateChangeStart',
